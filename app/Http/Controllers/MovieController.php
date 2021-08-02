@@ -15,12 +15,12 @@ class MovieController extends Controller
     public function index()
     {
         $popularMovies = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDdmZTdlN2JmNTdmOTljYTZmOTRkZjkyMTQ4NGQzOSIsInN1YiI6IjYwZmZhNTBiZGI3MmMwMDA1ZDgyYTU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vqNKOEJrdIWJtr2WGU-ai6O1jBOuV-ujrUKGvDRp-Kg')
-        ->get('https://api.themoviedb.org/3/movie/popular')
-        ->json()['results'];
+            ->get('https://api.themoviedb.org/3/movie/popular')
+            ->json()['results'];
 
         $upcomingMovies = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDdmZTdlN2JmNTdmOTljYTZmOTRkZjkyMTQ4NGQzOSIsInN1YiI6IjYwZmZhNTBiZGI3MmMwMDA1ZDgyYTU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vqNKOEJrdIWJtr2WGU-ai6O1jBOuV-ujrUKGvDRp-Kg')
-        ->get('https://api.themoviedb.org/3/movie/upcoming')
-        ->json()['results'];
+            ->get('https://api.themoviedb.org/3/movie/upcoming')
+            ->json()['results'];
 
         return view('movie.index', [
             'popularMovies' => $popularMovies,
@@ -57,7 +57,13 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        //
+        $movie = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDdmZTdlN2JmNTdmOTljYTZmOTRkZjkyMTQ4NGQzOSIsInN1YiI6IjYwZmZhNTBiZGI3MmMwMDA1ZDgyYTU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vqNKOEJrdIWJtr2WGU-ai6O1jBOuV-ujrUKGvDRp-Kg')
+            ->get('https://api.themoviedb.org/3/movie/' . $id . '?append_to_response=credits,images,videos')
+            ->json();
+        dump($movie);
+        return view('movie.show',[
+            'movie' => $movie
+        ]);
     }
 
     /**

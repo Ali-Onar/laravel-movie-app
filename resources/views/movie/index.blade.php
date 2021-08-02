@@ -10,7 +10,7 @@
                 @foreach ($upcomingMovies as $movie)
                     @if ($loop->index < 16)
                         <div class="mt-8 relative">
-                            <a href="#">
+                            <a href="{{ route('movie.show', $movie['id']) }}">
                                 <img class="hover:opacity-50 transition ease-in-out duration-150 rounded-lg" src="{{ 'https://image.tmdb.org/t/p/w500/' . $movie['backdrop_path'] }}" alt="">
                             </a>
                             <span class="ml-3 mt-3 border-2 border-yellow-500 rounded-full w-8 h-8 text-center absolute top-0 left-0 text-white font-semibold text-sm flex justify-center items-center">
