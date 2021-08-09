@@ -60,9 +60,15 @@ class MovieController extends Controller
         $movie = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDdmZTdlN2JmNTdmOTljYTZmOTRkZjkyMTQ4NGQzOSIsInN1YiI6IjYwZmZhNTBiZGI3MmMwMDA1ZDgyYTU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vqNKOEJrdIWJtr2WGU-ai6O1jBOuV-ujrUKGvDRp-Kg')
             ->get('https://api.themoviedb.org/3/movie/' . $id . '?append_to_response=credits,images,videos')
             ->json();
+
+        $movieRecommendations = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDdmZTdlN2JmNTdmOTljYTZmOTRkZjkyMTQ4NGQzOSIsInN1YiI6IjYwZmZhNTBiZGI3MmMwMDA1ZDgyYTU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vqNKOEJrdIWJtr2WGU-ai6O1jBOuV-ujrUKGvDRp-Kg')
+        ->get('https://api.themoviedb.org/3/movie/' . $id . '/recommendations')
+        ->json()['results'];
+
         dump($movie);
         return view('movie.show',[
-            'movie' => $movie
+            'movie' => $movie,
+            'movieRecommendations' => $movieRecommendations
         ]);
     }
 
