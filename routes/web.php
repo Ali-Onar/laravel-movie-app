@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActorController;
 use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +19,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/movie', [MovieController::class, 'index']);
+Route::get('/movie', [MovieController::class, 'index'])->name('movie.index');
 Route::get('/movie/{movie}', [MovieController::class, 'show'])->name('movie.show');
+
+Route::get('/actor', [ActorController::class, 'index'])->name('actor.index');
