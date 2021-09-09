@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActorController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\TvController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,5 @@ Route::get('/movie/{movie}', [MovieController::class, 'show'])->name('movie.show
 
 Route::get('/actor', [ActorController::class, 'index'])->name('actor.index');
 Route::get('/actor/{actor}', [ActorController::class, 'show'])->name('actor.show');
+
+Route::get('/tv/{tv}', [TvController::class, 'show'])->name('tv.show');

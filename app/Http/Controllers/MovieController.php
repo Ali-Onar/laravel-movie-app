@@ -65,7 +65,7 @@ class MovieController extends Controller
         ->get('https://api.themoviedb.org/3/movie/' . $id . '/recommendations')
         ->json()['results'];
 
-        dump($movie);
+        // dump($movie);
         return view('movie.show',[
             'movie' => $movie,
             'movieRecommendations' => $movieRecommendations
