@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class TvController extends Controller
 {
@@ -13,7 +14,19 @@ class TvController extends Controller
      */
     public function index()
     {
-        //
+        $popularTv = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDdmZTdlN2JmNTdmOTljYTZmOTRkZjkyMTQ4NGQzOSIsInN1YiI6IjYwZmZhNTBiZGI3MmMwMDA1ZDgyYTU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vqNKOEJrdIWJtr2WGU-ai6O1jBOuV-ujrUKGvDRp-Kg')
+            ->get('https://api.themoviedb.org/3/tv/popular')
+            ->json()['results'];
+
+        $topRatedTv = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDdmZTdlN2JmNTdmOTljYTZmOTRkZjkyMTQ4NGQzOSIsInN1YiI6IjYwZmZhNTBiZGI3MmMwMDA1ZDgyYTU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vqNKOEJrdIWJtr2WGU-ai6O1jBOuV-ujrUKGvDRp-Kg')
+            ->get('https://api.themoviedb.org/3/tv/top_rated')
+            ->json()['results'];
+
+        dump($topRatedTv);
+        return view('tv.index', [
+            'popularTv' => $popularTv,
+            'topRatedTv' => $topRatedTv
+        ]);
     }
 
     /**
