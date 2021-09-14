@@ -21,8 +21,9 @@
                     <h4 class="text-2xl text-white font-semibold mt-12">Known For</h4>
                     <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-8">
                         @foreach ($actors['combined_credits']['cast'] as $cast)
-                            <div class="mt-4">
-                                @if ($loop->index <6)
+                            @if ($loop->index <6)
+                                <div class="mt-4">
+                                
                                     @if ($cast['poster_path'] !== null)
                                         @if ($cast['media_type'] == 'movie')
                                             <a href="{{ route('movie.show', $cast['id']) }}">
@@ -48,13 +49,14 @@
                                             <a href="{{ route('tv.show', $cast['id']) }}" class="text-sm text-white text-center text-semibold hover:text-yellow-500 nt-3">{{ $cast['original_title'] }}</a>
                                         @endif
                                     @endif
-                                @endif
-                            </div>
+                                </div>
+                            @endif
+                            
                         @endforeach
                     </div>
                 </div>
                 <div class="credit-info">
-                    <h4 class="text-2xl text-white font-semibold mt-12">Known For</h4>
+                    <h4 class="text-2xl text-white font-semibold">Known For</h4>
                     <div class="bg-gray-700 shadow-xl rounded-lg">
                         <ul class="divide-y divide-gray-800">
                             @foreach ($actors['combined_credits']['cast'] as $credit)

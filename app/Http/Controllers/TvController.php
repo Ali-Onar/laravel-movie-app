@@ -22,7 +22,6 @@ class TvController extends Controller
             ->get('https://api.themoviedb.org/3/tv/top_rated')
             ->json()['results'];
 
-        dump($topRatedTv);
         return view('tv.index', [
             'popularTv' => $popularTv,
             'topRatedTv' => $topRatedTv
@@ -58,7 +57,20 @@ class TvController extends Controller
      */
     public function show($id)
     {
-        return view('tv.show');
+        $tvDetails = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDdmZTdlN2JmNTdmOTljYTZmOTRkZjkyMTQ4NGQzOSIsInN1YiI6IjYwZmZhNTBiZGI3MmMwMDA1ZDgyYTU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vqNKOEJrdIWJtr2WGU-ai6O1jBOuV-ujrUKGvDRp-Kg')
+            ->get('https://api.themoviedb.org/3/tv/' . $id . '?append_to_response=credits,images,videos')
+            ->json();
+
+        $tvRecommendations = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDdmZTdlN2JmNTdmOTljYTZmOTRkZjkyMTQ4NGQzOSIsInN1YiI6IjYwZmZhNTBiZGI3MmMwMDA1ZDgyYTU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vqNKOEJrdIWJtr2WGU-ai6O1jBOuV-ujrUKGvDRp-Kg')
+        ->get('https://api.themoviedb.org/3/tv/' . $id . '/recommendations')
+        ->json()['results'];
+
+        dump($tvDetails);
+
+        return view('tv.show', [
+            'tvDetails' => $tvDetails,
+            'tvRecommendations' => $tvRecommendations
+        ]);
     }
 
     /**

@@ -7,9 +7,15 @@
             @foreach ($popularTv as $tv)
                 @if ($loop->index <16)
                     <div class="mt-8 relative">
-                        <a href="">
-                            <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $tv['poster_path'] }}" class="hover:opacity-50 transition ease-in-out duration-150 rounded-lg" alt="">
-                        </a>
+                        @if ($tv['poster_path'] !== null)
+                            <a href="{{ route('tv.show', $tv['id']) }}">
+                                <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $tv['poster_path'] }}" class="hover:opacity-50 transition ease-in-out duration-150 rounded-lg" alt="">
+                            </a>
+                        @else 
+                            <a href="{{ route('tv.show', $tv['id']) }}">
+                                <img src="http://placehold.jp/300x450.png" class="hover:opacity-50 transition ease-in-out duration-150 rounded-lg" alt="">
+                            </a>
+                        @endif
                         <span class="ml-3 mt-3 border-2 border-yellow-500 rounded-full w-8 h-8 text-center absolute top-0 left-0 text-white font-semibold text-sm flex justify-center items-center">
                         {{ $tv['vote_average'] * 10 }} <small>%</small>
                         </span>
@@ -31,9 +37,15 @@
             @foreach ($topRatedTv as $tv)
                 @if ($loop->index <16)
                     <div class="mt-8 relative">
-                        <a href="">
-                            <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $tv['poster_path'] }}" class="hover:opacity-50 transition ease-in-out duration-150 rounded-lg" alt="">
-                        </a>
+                        @if ($tv['poster_path'] !== null)
+                            <a href="{{ route('tv.show', $tv['id']) }}">
+                                <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $tv['poster_path'] }}" class="hover:opacity-50 transition ease-in-out duration-150 rounded-lg" alt="">
+                            </a>
+                        @else 
+                            <a href="{{ route('tv.show', $tv['id']) }}">
+                                <img src="http://placehold.jp/300x450.png" class="hover:opacity-50 transition ease-in-out duration-150 rounded-lg" alt="">
+                            </a>
+                        @endif
                         <span class="ml-3 mt-3 border-2 border-yellow-500 rounded-full w-8 h-8 text-center absolute top-0 left-0 text-white font-semibold text-sm flex justify-center items-center">
                         {{ $tv['vote_average'] * 10 }} <small>%</small>
                         </span>
