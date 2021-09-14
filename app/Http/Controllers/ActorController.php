@@ -12,10 +12,10 @@ class ActorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($page = 1)
     {
         $actorPopular = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDdmZTdlN2JmNTdmOTljYTZmOTRkZjkyMTQ4NGQzOSIsInN1YiI6IjYwZmZhNTBiZGI3MmMwMDA1ZDgyYTU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vqNKOEJrdIWJtr2WGU-ai6O1jBOuV-ujrUKGvDRp-Kg')
-            ->get('https://api.themoviedb.org/3/person/popular')
+            ->get('https://api.themoviedb.org/3/person/popular?page=' . $page)
             ->json()['results'];
 
         // dump($actorPopular);
