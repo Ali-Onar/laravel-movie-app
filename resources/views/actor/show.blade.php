@@ -23,7 +23,6 @@
                         @foreach ($actors['combined_credits']['cast'] as $cast)
                             @if ($loop->index <6)
                                 <div class="mt-4">
-                                
                                     @if ($cast['poster_path'] !== null)
                                         @if ($cast['media_type'] == 'movie')
                                             <a href="{{ route('movie.show', $cast['id']) }}">
@@ -55,8 +54,8 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="credit-info">
-                    <h4 class="text-2xl text-white font-semibold">Known For</h4>
+                <div class="credit-info mt-5">
+                    <h4 class="text-2xl text-white font-semibold">Credits</h4>
                     <div class="bg-gray-700 shadow-xl rounded-lg">
                         <ul class="divide-y divide-gray-800">
                             @foreach ($actors['combined_credits']['cast'] as $credit)

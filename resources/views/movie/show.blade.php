@@ -5,10 +5,19 @@
         <div style="background-image: linear-gradient(to right, rgba(7.84%, 8.63%, 9.80%, 1.00) 150px, rgba(7.84%, 8.63%, 9.80%, 0.84) 100%)">
             <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
                 <div class="flex-none">
-                    <img class="w-72" src="{{ 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path'] }}" alt="">
+                    @if ($movie['poster_path'] !== null)
+                        <img class="w-72" src="{{ 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path'] }}" alt="">
+                    @else 
+                        <img class="w-72" src="http://placehold.jp/300x450.png" alt="">
+                    @endif
                 </div>
                 <div class="md:ml-24">
-                    <h2 class="text-4xl font-semibold text-white">{{ $movie['title'] }}</h2>
+                    @if ($movie['title'] !== null)
+                        <h2 class="text-4xl font-semibold text-white">{{ $movie['title'] }}</h2>
+                    @else
+                        <h2 class="text-4xl font-semibold text-white">{{ $movie['original_title'] }}</h2>
+                    @endif
+                    
                     <div class="flex items-center text-gray-400 text-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -40,12 +49,14 @@
                         </div>
                     </div>
                     <div class="mt-12">
-                        <a href="{{ 'https://www.youtube.com/watch?v=' . $movie['videos']['results'][2]['key'] }}" target="_blank" class="flex items-center bg-transparent text-gray-50 rounded font-semibold focus:outline-none px-4 py-4 hover:shadow-2xl transition ease-in-out duration-150">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="ml-2">Play Trailer</span>
-                        </a>
+                        @if (isset($movie['videos']['results'][0]['key']))
+                            <a href="{{ 'https://www.youtube.com/watch?v=' . $movie['videos']['results'][0]['key'] }}" target="_blank" class="flex items-center bg-transparent text-gray-50 rounded font-semibold focus:outline-none px-4 py-4 hover:shadow-2xl transition ease-in-out duration-150">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="ml-2">Play Trailer</span>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -58,9 +69,15 @@
                 @foreach ($movie['credits']['cast'] as $cast)
                     @if ($loop->index < 7)
                         <div class="mt-8">
-                            <a href="">
-                            <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $cast['profile_path'] }}" alt="" class="hover:opacity-50 transition ease-in-out duration-150 rounded-lg"/>
-                            </a>
+                            @if ($cast['profile_path'] !== null)
+                                <a href="">
+                                    <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $cast['profile_path'] }}" alt="" class="hover:opacity-50 transition ease-in-out duration-150 rounded-lg"/>
+                                </a>
+                            @else
+                                <a href="">
+                                    <img src="http://placehold.jp/300x450.png" alt="" class="hover:opacity-50 transition ease-in-out duration-150 rounded-lg"/>
+                                </a>
+                            @endif
                             <div class="mt-2">
                             <a href="" class="text-md pt-4 text-white font-semibold hover:text-yellow-500">{{ $cast['name'] }}</a>
                                 <div class="text-sm text-gray-400">
