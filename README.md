@@ -2,7 +2,7 @@
 
 API Application by pulling TMDB data with Laravel.
 
-[Live Demo](https://https://tmdb.bilgeton.com/)
+[Live Demo](https://tmdb.bilgeton.com/)
 
 ## Setup:
 
