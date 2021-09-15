@@ -65,7 +65,6 @@ class TvController extends Controller
         ->get('https://api.themoviedb.org/3/tv/' . $id . '/recommendations')
         ->json()['results'];
 
-        dump($tvDetails);
 
         return view('tv.show', [
             'tvDetails' => $tvDetails,

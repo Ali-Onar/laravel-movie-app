@@ -57,7 +57,7 @@ class ActorController extends Controller
         $actors = Http::withToken('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDdmZTdlN2JmNTdmOTljYTZmOTRkZjkyMTQ4NGQzOSIsInN1YiI6IjYwZmZhNTBiZGI3MmMwMDA1ZDgyYTU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vqNKOEJrdIWJtr2WGU-ai6O1jBOuV-ujrUKGvDRp-Kg')
             ->get('https://api.themoviedb.org/3/person/' . $id . '?append_to_response=combined_credits')
             ->json();
-        dump($actors);
+            
         return view('actor.show', ['actors' => $actors]);
     }
 
